@@ -6,7 +6,7 @@
 /*   By: dtanski <dtanski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:49:11 by dtanski           #+#    #+#             */
-/*   Updated: 2025/06/22 15:35:31 by dtanski          ###   ########.fr       */
+/*   Updated: 2025/06/24 14:56:08 by dtanski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void PhoneBook:: addContact()
 
 	if (this->_full == false)
 	{
-		std::cout << "That's your " << this->_count + 1 << "contact" << std::endl;
+		std::cout << "That's your " << this->_count + 1 << " contact" << std::endl;
 		if (this->_contacts[this->_count].set_data() == true)
 		{
 			if (this->_count == 7)
@@ -37,16 +37,16 @@ void PhoneBook:: addContact()
 	}
 	else
 	{
-		std::cout << "Phonebook can store only 8 members. Do you want to replace last one? If you want to - press 'Y' " << std::endl;
+		std::cout << "Phonebook can store only 8 members. Do you want to replace last one? \n If you want to - press 'y' . Press anything else to go to main menu" << std::endl;
 		std::getline(std::cin, input);
 		if (std::cin.eof())
 		{
 			std::cout << "Ctrl + D pressed. Exiting a program";
 			std::exit(0);
 		}
-		else if (input.compare("y") == 0)
+		else if (input.compare("y") == 0 || input.compare("Y") == 0)
 		{
-			for (int i = 0; i <= 7; i++)
+			for (int i = 0; i < 7; i++)
 				this->_contacts[i] = this->_contacts[i + 1];
 			this->_contacts[this->_count].set_data();
 		}
