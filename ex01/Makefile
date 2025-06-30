@@ -3,20 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dtanski <dtanski@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 05:10:32 by dtanski           #+#    #+#              #
-#    Updated: 2025/06/23 17:28:38 by marvin           ###   ########.fr        #
+#    Updated: 2025/06/23 17:16:02 by dtanski          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = my_phonebook
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g 
 
-SRC = megaphone.cpp
-OBJ = $(SRC:.cpp=.o)
+SRC_DIR = src
+OBJ_DIR = obj
+SRC = src/Contact.cpp \
+		src/PhoneBook.cpp \
+		src/main.cpp
+		
+OBJ = $(SRC:src/%.cpp=obj/%.o)
 
 #TEXT COLORS
 GREEN		=	\033[0;32m
@@ -31,8 +36,12 @@ $(NAME):$(OBJ)
 		@$(CC) $(CFLAGS) $(OBJ) -o $@
 		@echo "$(GREEN)[ OK ]$(RESET) $(YELLOW)Mandatory Ready!$(RESET)"
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -o $@ -c $<
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+		@$(CC) $(CFLAGS) -o $@ -c $<
+
+$(OBJ_DIR):
+		@mkdir -p $(OBJ_DIR)
+		@echo "OBJ directory created"
 
 clean: 
 		@rm -rf $(OBJ)

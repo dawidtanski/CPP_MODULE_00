@@ -3,19 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dtanski <dtanski@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 05:10:32 by dtanski           #+#    #+#              #
-#    Updated: 2025/06/23 17:28:38 by marvin           ###   ########.fr        #
+#    Updated: 2025/06/04 19:08:56 by dtanski          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = globalBankster
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g 
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g -I $(INC_DIR)
 
-SRC = megaphone.cpp
+SRC_DIR = src/
+INC_DIR = inc/
+
+SRC = src/Account.cpp \
+		src/tests.cpp \
+		
 OBJ = $(SRC:.cpp=.o)
 
 #TEXT COLORS
@@ -31,8 +36,8 @@ $(NAME):$(OBJ)
 		@$(CC) $(CFLAGS) $(OBJ) -o $@
 		@echo "$(GREEN)[ OK ]$(RESET) $(YELLOW)Mandatory Ready!$(RESET)"
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -o $@ -c $<
+src/%.o: src/%.cpp
+		$(CC) $(CFLAGS) -o $@ -c $<
 
 clean: 
 		@rm -rf $(OBJ)
