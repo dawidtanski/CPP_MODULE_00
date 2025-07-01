@@ -6,12 +6,12 @@
 /*   By: dtanski <dtanski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:45:43 by dtanski           #+#    #+#             */
-/*   Updated: 2025/06/22 15:25:50 by dtanski          ###   ########.fr       */
+/*   Updated: 2025/07/01 16:10:20 by dtanski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK2_HPP
-# define PHONEBOOK2_HPP
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
 #include "Contact.hpp"
 

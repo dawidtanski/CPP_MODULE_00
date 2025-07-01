@@ -6,12 +6,13 @@
 /*   By: dtanski <dtanski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 12:23:21 by dtanski           #+#    #+#             */
-/*   Updated: 2025/06/30 21:52:14 by dtanski          ###   ########.fr       */
+/*   Updated: 2025/07/01 14:14:33 by dtanski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string.h>
+#include <string>
+#include <cctype>
 
 std::string	to_uppercase(std::string str)
 {
@@ -27,21 +28,12 @@ int	main(int argc, char **argv)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
 		return (0);
 	}
-	std::string result;
-	std::string	word;
-	for (int i = 0; i < argc; i++)
+	for (int i = 1; i < argc; i++)
 	{
-		word = to_uppercase(argv[i]);
-		result += word;
-		result += " ";
+		std::cout << to_uppercase(argv[i]);
+		if (i < argc - 1)
+			std::cout << " ";
 	}
-	// for (size_t i = 0; i < strlen(argv[1]); i++)
-	// {
-	// 	if (std::islower(argv[1][i]))
-	// 		result[i] = std::toupper(argv[1][i]);
-	// 	else
-	// 		result[i] = argv[1][i];
-	// }
-	std::cout << result << "\n";
+	std::cout << std::endl;
 	return (0);
 }

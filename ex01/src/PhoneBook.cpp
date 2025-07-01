@@ -6,7 +6,7 @@
 /*   By: dtanski <dtanski@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 11:49:11 by dtanski           #+#    #+#             */
-/*   Updated: 2025/06/24 14:56:08 by dtanski          ###   ########.fr       */
+/*   Updated: 2025/07/01 16:14:24 by dtanski          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void PhoneBook:: addContact()
 		if (this->_contacts[this->_count].set_data() == true)
 		{
 			if (this->_count == 7)
+			{
 				this->_full = true;
+				this->_count++;
+			}
 			else
 				this->_count++;
 		}
@@ -48,10 +51,10 @@ void PhoneBook:: addContact()
 		{
 			for (int i = 0; i < 7; i++)
 				this->_contacts[i] = this->_contacts[i + 1];
-			this->_contacts[this->_count].set_data();
+			this->_contacts[7].set_data();
 		}
 		else
-			std::cout << "Back to main menu";
+			std::cout << "Back to main menu" << std::endl;
 		
 	}
 }
@@ -61,15 +64,26 @@ void	PhoneBook:: searchContact() const
 	int	index;
 
 	if (this->_count == 0)
-		std::cout << "Please add at least one contact";
+	{
+		std::cout << "Please add at least one contact" << std::endl;
+		return ;
+	}
 	else
 	{
+		std::cout << "|-------------------------------------------|" << std::endl;
+		std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
+		std::cout << "|----------|----------|----------|----------|" << std::endl;
+		for (int i = 0; i < this->_count; i++)
+			this->_contacts[i].get_data(i + 1);
+		std::cout << "|-------------------------------------------|" << std::endl;
+
+
 		std::string	input;
 		std::cout << "Put the number 1-8 to check contact" << std::endl;
 		while (!(std::getline(std::cin, input)) || input.length() > 1 
-                || (std::atoi(input.c_str()) -1 > this->_count && this->_full == false))
+       	     || (std::atoi(input.c_str()) -1 > this->_count && this->_full == false))
 		{
-			if (std::cin.eof() == 0)
+			if (std::cin.eof())
 			{
 				std::cout << "Ctrl + D pressed. Exiting phonebook" << std::endl;
 				std::exit(0);
@@ -84,21 +98,15 @@ void	PhoneBook:: searchContact() const
 			{
 				std::cout << "You have only " << this->_count << " contacts in your phonebook" << std::endl;
 				std::cin.clear();
-				std::cout << "Enter the index of the contact you want to see. Press '0' to exit.\n Index: ";
-			}
+				std::cout << "Enter the index of the contact you want to see. Press '0' to exit.\n Index: ";			}
 		}
 		index = std::atoi(input.c_str());
-		if (index > 0)
+		if (index <= this->_count)
 		{
-			std::cout << "|-------------------------------------------|" << std::endl;
-			std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
-			std::cout << "|----------|----------|----------|----------|" << std::endl;
-			this->_contacts[index - 1].get_data(index);
-			std::cout << "|-------------------------------------------|" << std::endl;
+			this->_contacts[index - 1].get_field(index -1);
 		}
 		else
 			std::cout << "Exiting PhoneBook's search mode." << std::endl;
-
 	}
 }
 
